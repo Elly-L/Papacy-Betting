@@ -19,7 +19,7 @@ import { toast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { CandidateDetails } from "./candidate-details"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Phone, CreditCard } from "lucide-react"
+import { Phone, CreditCard, ArrowLeft } from "lucide-react"
 import { useBetting } from "@/context/betting-context"
 
 export function CandidateGrid() {
@@ -116,9 +116,14 @@ export function CandidateGrid() {
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
+        <DialogContent className="max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Place Your Bet</DialogTitle>
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="icon" onClick={() => setOpen(false)} className="h-8 w-8">
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+              <DialogTitle>Place Your Bet</DialogTitle>
+            </div>
             <DialogDescription>
               {selectedCandidate && (
                 <div className="flex items-center gap-3 mt-2">
@@ -212,7 +217,7 @@ export function CandidateGrid() {
                   <div className="bg-gray-50 p-3 rounded-md">
                     <p className="text-sm text-gray-600">Potential Winnings</p>
                     <p className="font-bold text-lg text-green-700">
-                      {(Number.parseFloat(betAmount) * selectedCandidate.odds).toFixed(2)}
+                      KES {(Number.parseFloat(betAmount) * selectedCandidate.odds).toFixed(2)}
                     </p>
                   </div>
                 )}

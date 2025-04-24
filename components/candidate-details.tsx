@@ -1,11 +1,19 @@
 "use client"
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Globe, Award, BookOpen, Users } from "lucide-react"
+import { Globe, Award, BookOpen, Users, ArrowLeft } from "lucide-react"
 
 // Candidate detailed information sourced from BBC and similar sources
 const candidateDetails = {
@@ -113,9 +121,14 @@ export function CandidateDetails({ candidate, open, onOpenChange }) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl">
-        <DialogHeader>
-          <DialogTitle className="text-2xl">{candidate.name}</DialogTitle>
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader className="sticky top-0 bg-white z-10 pb-2">
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" onClick={() => onOpenChange(false)} className="h-8 w-8">
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+            <DialogTitle className="text-2xl">{candidate.name}</DialogTitle>
+          </div>
           <DialogDescription className="flex items-center gap-2 mt-2">
             <Badge variant="outline" className="bg-gray-100">
               {candidate.nationality}
@@ -187,6 +200,10 @@ export function CandidateDetails({ candidate, open, onOpenChange }) {
             </Tabs>
           </div>
         </div>
+
+        <DialogFooter className="sticky bottom-0 bg-white pt-2">
+          <Button onClick={() => onOpenChange(false)}>Close</Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )

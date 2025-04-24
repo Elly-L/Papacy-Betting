@@ -5,13 +5,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Clock } from "lucide-react"
 
 export function Countdown() {
-  // Set deadline to 2 weeks from now (placeholder)
+  // Set a fixed deadline date (15 days from a specific date)
+  // This ensures everyone sees the same countdown regardless of when they load the app
   const [deadline] = useState(() => {
-    // Conclave typically begins 15-20 days after the death of a pope
-    // Using 15 days as the minimum time
-    const date = new Date()
-    date.setDate(date.getDate() + 15)
-    return date
+    // Set a fixed date for the conclave - e.g., May 15, 2025
+    const fixedDeadline = new Date("2025-05-15T00:00:00Z")
+    return fixedDeadline
   })
 
   const [timeLeft, setTimeLeft] = useState({

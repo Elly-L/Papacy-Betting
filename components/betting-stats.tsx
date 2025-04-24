@@ -82,8 +82,8 @@ export function BettingStats() {
   return (
     <div className="grid grid-cols-1 gap-8">
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
+        <CardHeader className="flex flex-row items-center justify-between flex-wrap gap-2">
+          <CardTitle className="flex items-center gap-2 flex-wrap">
             Total Bets by Candidate
             {trendingCandidate && (
               <Badge className="ml-2 bg-amber-500 hover:bg-amber-600">
@@ -96,7 +96,7 @@ export function BettingStats() {
           </Badge>
         </CardHeader>
         <CardContent>
-          <div className="h-[600px]">
+          <div className="h-[600px] overflow-x-auto">
             <ChartContainer
               config={{
                 bets: {
@@ -106,7 +106,12 @@ export function BettingStats() {
               }}
             >
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={animatedData} layout="vertical" margin={{ top: 20, right: 50, left: 150, bottom: 20 }}>
+                <BarChart
+                  data={animatedData}
+                  layout="vertical"
+                  margin={{ top: 20, right: 50, left: 150, bottom: 20 }}
+                  minWidth={800} // Ensure minimum width for mobile scrolling
+                >
                   <XAxis type="number" tick={{ fontSize: 14 }} tickFormatter={(value) => value.toLocaleString()} />
                   <YAxis type="category" dataKey="name" tick={{ fontSize: 14 }} width={150} />
                   <Tooltip
